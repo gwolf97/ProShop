@@ -8,8 +8,6 @@ const ProductScreen = () => {
     const {id} = useParams()
     const product = products.find((p) => p._id === id)
 
-    
-
   return (
     <>
     <Link className='btn btn-dark my-3' to="/">

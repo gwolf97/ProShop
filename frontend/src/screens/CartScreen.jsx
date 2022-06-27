@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import {Link, useLocation, useNavigate, useParams } from "react-router-dom"
 import {Row, Col, ListGroup, Image, Form, Button, Card} from "react-bootstrap"
-import { addToCart } from '../actions/cartActions'
+import { addToCart, removeFromCart } from '../actions/cartActions'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from "../components/Message"
 
@@ -23,7 +23,7 @@ const CartScreen = () => {
     },[dispatch, id, qty])
 
     const removeFromCartHandler = (id) =>{
-        console.log("remove")
+        dispatch(removeFromCart(id))
     }
 
     const checkoutHandler = () => {
@@ -56,7 +56,7 @@ const CartScreen = () => {
                                     </Form.Control>
                                 </Col>
                                 <Col md={2}>
-                                    <Button type="button" variant="light" onClick={() => removeFromCartHandler(id.product)}>
+                                    <Button type="button" variant="light" onClick={() => removeFromCartHandler(item.product)}>
                                         <i className='fas fa-trash'></i>
                                     </Button>
                                 </Col>

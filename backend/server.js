@@ -1,7 +1,7 @@
 import express from "express"
 import dotenv from "dotenv"
 import colors from "colors"
-import { notFound, errorHandler } from "./middlewear/errorMiddlewear.js"
+import { notFound, errorHandler } from "./middlewear/errorMiddleware.js"
 import connectDB from "./config/db.js"
 
 import productRoutes from "./routes/productRoutes.js"

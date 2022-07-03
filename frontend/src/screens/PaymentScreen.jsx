@@ -22,7 +22,7 @@ const PaymentScreen = () => {
 
     const submitHandler = (e) =>{
         e.preventDefault()
-        dispatch(savePaymentMethod({paymentMethod}))
+        dispatch(savePaymentMethod(paymentMethod))
         navigate("/placeorder")
     }
 
@@ -45,7 +45,6 @@ const PaymentScreen = () => {
          </Form.Check>
         </Col>
         </Form.Group>
-
             <Button className='my-3' type="submit" variant="primary">
                 Continue
             </Button>

@@ -24,8 +24,10 @@ const OrderScreen = () => {
     }
 
     React.useEffect(()=>{
-        dispatch(getOrderDetails(params.id))
-    },[])
+        if(!order || order._id !== params.id) {
+            dispatch(getOrderDetails(params.id))
+        }
+    },[order, params.id])
 
   return loading ? <Loader/> : error ? <Message variant="danger">{error}</Message> : <><h1>Order {order._id}</h1>
        <Row>

@@ -1,8 +1,8 @@
 import React from 'react'
 import axios from "axios"
 import {PayPalButton} from "react-paypal-button-v2"
-import { useNavigate, useParams } from 'react-router-dom'
-import {Button, Row, Col, ListGroup, Image, Card, ListGroupItem} from "react-bootstrap"
+import { useParams } from 'react-router-dom'
+import { Row, Col, ListGroup, Image, Card,} from "react-bootstrap"
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
@@ -12,7 +12,6 @@ import { ORDER_PAY_RESET } from '../constants/orderContants'
 
 const OrderScreen = () => {
     const dispatch = useDispatch()
-    const navigate = useNavigate()
     const params = useParams()
 
     const [sdkReady, setSdkReady] = React.useState(false)

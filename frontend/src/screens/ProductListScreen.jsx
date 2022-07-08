@@ -31,11 +31,11 @@ const ProductListScreen = () => {
         }
 
         if(successCreate){
-            navigate(`/admin/product${createdProduct._id}/edit`)
+            navigate(`/admin/product/${createdProduct._id}/edit`)
         }else{
             dispatch(listProducts())
         }
-    }, [dispatch, navigate, userInfo, successDelete, successCreate, createProduct])
+    }, [dispatch, navigate, userInfo, successDelete, successCreate, createdProduct])
 
     const deleteHandler = (id) => {
         if(window.confirm("Are you sure")){

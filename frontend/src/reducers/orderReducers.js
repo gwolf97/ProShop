@@ -1,4 +1,4 @@
-import {ORDER_CREATE_SUCCESS, ORDER_CREATE_REQUEST, ORDER_CREATE_FAIL, ORDER_DETAILS_REQUEST, ORDER_DETAILS_SUCCESS, ORDER_DETAILS_FAIL, ORDER_PAY_RESET, ORDER_PAY_FAIL, ORDER_PAY_SUCCESS, ORDER_PAY_REQUEST, ORDER_LIST_MY_FAIL, ORDER_LIST_MY_SUCCESS, ORDER_LIST_MY_REQUEST, ORDER_LIST_MY_RESET} from "../constants/orderContants"
+import {ORDER_CREATE_SUCCESS, ORDER_CREATE_REQUEST, ORDER_CREATE_FAIL, ORDER_DETAILS_REQUEST, ORDER_DETAILS_SUCCESS, ORDER_DETAILS_FAIL, ORDER_PAY_RESET, ORDER_PAY_FAIL, ORDER_PAY_SUCCESS, ORDER_PAY_REQUEST, ORDER_LIST_MY_FAIL, ORDER_LIST_MY_SUCCESS, ORDER_LIST_MY_REQUEST, ORDER_LIST_MY_RESET, ADMIN_ORDER_DETAILS_FAIL, ADMIN_ORDER_DETAILS_SUCCESS, ADMIN_ORDER_DETAILS_REQUEST} from "../constants/orderContants"
 
 export const orderCreateReducer = (state = {}, action) =>{
     switch(action.type){
@@ -85,6 +85,28 @@ export const orderListMyReducer = (state = {orders:[]}, action) =>{
             }
         case ORDER_LIST_MY_RESET:
             return {orders: []}
+        default:
+            return state
+    }
+}
+
+export const adminOrderDetailsReducer = (state = {orders: []}, action) =>{
+    switch(action.type){
+        case ADMIN_ORDER_DETAILS_REQUEST:
+            return {
+                ...state,
+                loading: true
+            }
+        case ADMIN_ORDER_DETAILS_SUCCESS:
+            return {
+                loading:false,
+                orders: action.payload
+            }
+        case ADMIN_ORDER_DETAILS_FAIL:
+            return{
+                loading: false,
+                error: action.payload,
+            }
         default:
             return state
     }

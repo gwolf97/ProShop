@@ -26,7 +26,7 @@ const ProductListScreen = () => {
 
     useEffect(() => {
         dispatch({type: PRODUCT_CREATE_RESET})
-        if(!userInfo.isAdmin){
+        if(userInfo === null || !userInfo || !userInfo.isAdmin){
             navigate("/login")
         }
 

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
+import axios from 'axios'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import {Form, Button,} from "react-bootstrap"
+import {Form, Button, Image} from "react-bootstrap"
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
@@ -10,6 +11,8 @@ import { PRODUCT_UPDATE_RESET } from '../constants/productConstants'
 
 const ProductEditScreen = () => {
 
+    // <Form.File id="image-file" label="Choose File"  onChange={uploadFileHandler}/>
+
     const [price, setPrice] = React.useState(0)
     const [name, setName] = React.useState("")
     const [image, setImage] = React.useState("")
@@ -17,6 +20,7 @@ const ProductEditScreen = () => {
     const [category, setCategory] = React.useState("")
     const [countInStock, setCountInStock] = React.useState(0)
     const [description, setDescription] = React.useState("")
+    const [uploading, setUploading] = React.useState(false)
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -53,7 +57,30 @@ const ProductEditScreen = () => {
     const submitHandler = (e) =>{
         e.preventDefault()
         dispatch(updateProduct({_id: params.id, name, price, image, category, brand, countInStock, description}))
+    }
 
+    const uploadFileHandler = async(e) =>{
+        const file = e.target.files[0]
+        const formData = new FormData()
+        formData.append("image", file)
+        setUploading(true)
+
+        try {
+            const config = {
+                headers: {
+                    "Content-Type" : "multipart/form-data"
+                }
+            }
+
+            const {data} = await axios.post("/api/upload", formData, config)
+
+            setImage(data)
+            setUploading(false)
+        } catch (error) {
+            console.error(error)
+            setUploading(false)
+            setImage("")
+        }
     }
 
   return (
@@ -87,11 +114,17 @@ const ProductEditScreen = () => {
 
                     <Form.Group controlId="image">
                         <Form.Label>Image</Form.Label>
+                        <Image src={image} fluid></Image>
                         <Form.Control 
                         type="text" 
                         placeholder="Enter image url" 
                         value={image} 
                         onChange={(e) => setImage(e.target.value)}></Form.Control>
+                        <Form.Group onChange={uploadFileHandler} controlId="image-file" className="mb-3">
+                            <Form.Label>Choose Image</Form.Label>
+                            <Form.Control type="file" />
+                        </Form.Group>
+                        {uploading && <Loader/>}
                     </Form.Group>
 
                     <Form.Group controlId="brand">

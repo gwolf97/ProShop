@@ -7,12 +7,13 @@ import Loader from "../components/Loader"
 import Message from "../components/Message"
 import { listProductDetails, createProductReview } from '../actions/productActions'
 import { PRODUCT_CREATE_REVIEW_RESET } from '../constants/productConstants'
+import Meta from '../components/Meta'
 
 
 const ProductScreen = () => {
     const [qty, setQty] = React.useState(1)
     const [rating, setRating] = React.useState(0)
-    const [comment, setComment] = React.useState(1)
+    const [comment, setComment] = React.useState("")
 
     const dispatch = useDispatch()
 
@@ -56,7 +57,9 @@ const ProductScreen = () => {
     <Link className='btn btn-dark my-3' to="/">
         Go Back
     </Link>
-    {loading ? <Loader/> : error ? <Message variant="danger">{error}</Message> :    <> <Row>
+    {loading ? <Loader/> : error ? <Message variant="danger">{error}</Message> :    <> 
+    <Meta title={product.name}/>
+    <Row>
         <Col md={6}>
             <Image src={product.image} alt={product.name} fluid/>
         </Col>

@@ -5,8 +5,10 @@ import {Row, Col} from "react-bootstrap"
 import { listProducts } from '../actions/productActions'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import Paginate from '../components/Paginate'
+import ProductCarousel from '../components/ProductCarousel'
+import Meta from '../components/Meta'
 
 const HomeScreen = () => { 
 
@@ -27,6 +29,8 @@ const HomeScreen = () => {
 
   return (
     <>
+    <Meta/>
+    {!keyword  ? <ProductCarousel/> : <Link to="/" className='btn btn-light'>GO BACK</Link>}
         <h1 className='my-3'>Latest Products</h1>
         {loading ? <Loader/> : error ? <Message variant="danger">{error}</Message> : <> <Row>
             {products.map(product => (

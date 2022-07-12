@@ -5,8 +5,13 @@ import {Row, Col} from "react-bootstrap"
 import { listProducts } from '../actions/productActions'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
+import { useParams } from 'react-router-dom'
 
 const HomeScreen = () => { 
+
+    const params = useParams()
+
+    const {keyword} = params
 
     const dispatch = useDispatch()
 
@@ -14,8 +19,8 @@ const HomeScreen = () => {
     const {loading, error, products} = productList
 
     React.useEffect(()=>{
-        dispatch(listProducts())
-    },[dispatch])
+        dispatch(listProducts(keyword))
+    },[dispatch, keyword])
 
 
   return (

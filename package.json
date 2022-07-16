@@ -8,7 +8,7 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "install-client": "cd frontend && npm install",
+    "install-client": "cd frontend && npm install --legacy-peer-deps",
     "build": "cd frontend && npm run build",
     "start": "node backend/server",
     "test": "echo \"Error: no test specified\" && exit 1",

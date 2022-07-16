@@ -8,8 +8,8 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "build": "cd frontend && npm run build",
     "install-client": "cd frontend && npm install",
+    "build": "cd frontend && npm run build",
     "start": "node backend/server",
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "nodemon backend/server",
@@ -17,7 +17,7 @@
     "dev": "concurrently \"npm run server\" \"npm run frontend\"",
     "data:import": "node backend/seeder",
     "data:destroy": "node backend/seeder -d",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm run install-client && npm run build --prefix frontend"
   },
   "repository": {
     "type": "git",
